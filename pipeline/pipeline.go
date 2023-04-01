@@ -21,10 +21,10 @@ The first stage is sometimes called the source or producer; the last stage, the 
 */
 
 // Stage takes an input channel of type T, an output channel of type T.
-// The output channel is the input channel for the next ExecFn in the pipeline.
+// The output channel is the input channel for the next stage in the pipeline.
 type Stage[T any] func(<-chan T, chan T)
 
-// Run receive values from upstream via inbound channel.
+// Run receives data from upstream via inbound channel.
 // Performs some function on that data, usually producing new values.
 // Send values downstream via outbound channel
 func (s Stage[T]) Run(in <-chan T) chan T {
