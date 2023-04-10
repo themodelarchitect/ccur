@@ -20,8 +20,8 @@ which have only outbound or inbound channels, respectively.
 The first stage is sometimes called the source or producer; the last stage, the sink or consumer.
 */
 
-// Stage takes an input channel of type T, an output channel of type T.
-// The output channel is the input channel for the next ExecFn in the pipeline.
+// Stage takes an input channel of type T, an output channel of type T, and an error channel of type error.
+// The output channel is the input channel for the next Stage in the pipeline.
 type Stage[T any] func(<-chan T, chan T)
 
 // Run receive values from upstream via inbound channel.
@@ -51,8 +51,8 @@ func NewPipeline[T any](stages ...Stage[T]) Pipeline[T] {
 	return stages
 }
 
-// Sink will take items from a channel of type T and run the function on each item.
-func Sink[T any](in <-chan T, fn func(T) error) {
+// Sink will take items from a channel of type T and perform the function.
+func Sink[T any](in <-chan T, fn func(T)) {
 	// loop until the in channel is closed
 	for {
 		select {
@@ -60,10 +60,7 @@ func Sink[T any](in <-chan T, fn func(T) error) {
 			if !ok { // in channel is closed
 				return // Done
 			}
-			err := fn(x)
-			if err != nil {
-				panic(err)
-			}
+			fn(x)
 		}
 	}
 }
