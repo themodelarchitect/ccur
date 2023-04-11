@@ -1,6 +1,7 @@
 package pipeline
 
 import (
+	"fmt"
 	"github.com/jkittell/toolbox"
 	"testing"
 )
@@ -38,6 +39,14 @@ var square = Stage[int](func(in <-chan int, out chan int) {
 		out <- n
 	}
 })
+
+var onSuccess = func(i int) {
+	fmt.Println("sink running function on success ", i)
+}
+
+var onError = func(e error) {
+	fmt.Println("sink running function on error ", e.Error())
+}
 
 func TestNewPipeline(t *testing.T) {
 	done := make(chan bool)
@@ -252,6 +261,8 @@ func TestFanOut(t *testing.T) {
 	if len(act) != 10 {
 		t.Fail()
 	}
+
+	Sink[int](out, onSuccess)
 }
 
 func TestMerge(t *testing.T) {
@@ -272,6 +283,8 @@ func TestMerge(t *testing.T) {
 	if len(act) != 10 {
 		t.Fail()
 	}
+
+	Sink[int](out, onSuccess)
 }
 
 func TestSink(t *testing.T) {
@@ -284,7 +297,5 @@ func TestSink(t *testing.T) {
 		return i
 	}, 2)
 
-	Sink[int](out, func(i int) error {
-		return nil
-	})
+	Sink[int](out, onSuccess)
 }

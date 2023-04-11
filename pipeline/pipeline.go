@@ -52,7 +52,7 @@ func NewPipeline[T any](stages ...Stage[T]) Pipeline[T] {
 }
 
 // Sink will take items from a channel of type T and run the function on each item.
-func Sink[T any](in <-chan T, fn func(T) error) {
+func Sink[T any](in <-chan T, fn func(T)) {
 	// loop until the in channel is closed
 	for {
 		select {
@@ -60,10 +60,7 @@ func Sink[T any](in <-chan T, fn func(T) error) {
 			if !ok { // in channel is closed
 				return // Done
 			}
-			err := fn(x)
-			if err != nil {
-				panic(err)
-			}
+			fn(x)
 		}
 	}
 }
