@@ -294,20 +294,20 @@ func Repeat[T any](done <-chan bool, values ...T) <-chan T {
 	return stream
 }
 
-// Source takes in a variadic slice of type T, constructs a buffered
+// Source takes in an array of type T, constructs a buffered
 // channel of T with a length equal to the incoming T slice, starts a
 // goroutine, and returns the constructed channel. Then, on the goroutine that
 // was created, Source ranges over the variadic slice that was passed in and sends
 // the slices' values on the channel it created.
-func Source[T any](done <-chan bool, values ...T) chan T {
+func Source[T any](done <-chan bool, values array.Array[T]) chan T {
 	stream := make(chan T)
 	go func() {
 		defer close(stream)
-		for _, v := range values {
+		for i := 0; i < values.Length(); i++ {
 			select {
 			case <-done:
 				return
-			case stream <- v:
+			case stream <- values.Lookup(i):
 			}
 		}
 	}()

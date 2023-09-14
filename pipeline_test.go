@@ -7,7 +7,13 @@ import (
 	"testing"
 )
 
-var numbers = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+func numbers() array.Array[int] {
+	n := array.New[int]()
+	for i := 0; i < 10; i++ {
+		n.Push(i)
+	}
+	return n
+}
 
 var ifOdd = Stage[int](func(in <-chan int, out chan int) {
 	for i := range in {
@@ -82,7 +88,7 @@ func TestNewPipeline(t *testing.T) {
 	}
 
 	if !toolbox.Equals(exp, act) {
-		t.Fail()
+		t.FailNow()
 	}
 }
 
@@ -90,7 +96,7 @@ func TestSource(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 
 	// for every odd, multiply times two, and add the results
 	stages := array.New[Stage[int]]()
@@ -138,7 +144,7 @@ func TestTake(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 
 	out := Take[int](done, in, 3)
 
@@ -213,7 +219,7 @@ func TestSplit(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 	out1, out2 := Split[int](done, in)
 
 	for o := range out1 {
@@ -257,7 +263,7 @@ func TestFanOut(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 
 	out := FanOut[int](done, in, func(i int) int {
 		return i
@@ -279,7 +285,7 @@ func TestMerge(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 
 	out := FanOut[int](done, in, func(i int) int {
 		return i
@@ -301,7 +307,7 @@ func TestSink(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	in := Source(done, numbers...)
+	in := Source(done, numbers())
 
 	out := FanOut[int](done, in, func(i int) int {
 		return i
