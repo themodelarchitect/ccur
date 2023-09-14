@@ -1,6 +1,7 @@
 package pipeline
 
 import (
+	"github.com/jkittell/array"
 	"sync"
 )
 
@@ -36,19 +37,22 @@ func (s Stage[T]) Run(in <-chan T) chan T {
 	return out
 }
 
-// Pipeline is a slice of functions to run in sequence.
-type pipeline[T any] []Stage[T]
+// Pipeline is an array of functions to run in sequence.
+type Pipeline[T any] struct {
+	Stages array.Array[Stage[T]]
+}
 
 // Run the functions in the pipeline.
-func (p pipeline[T]) Run(in <-chan T) <-chan T {
-	for _, stage := range p {
+func (p Pipeline[T]) Run(in <-chan T) <-chan T {
+	for i := 0; i < p.Stages.Length(); i++ {
+		stage := p.Stages.Lookup(i)
 		in = stage.Run(in)
 	}
 	return in
 }
 
-func NewPipeline[T any](stages ...Stage[T]) pipeline[T] {
-	return stages
+func NewPipeline[T any](stages array.Array[Stage[T]]) Pipeline[T] {
+	return Pipeline[T]{Stages: stages}
 }
 
 // Sink will take items from a channel of type T and run the function on each item.

@@ -2,6 +2,7 @@ package pipeline
 
 import (
 	"fmt"
+	"github.com/jkittell/array"
 	"github.com/jkittell/toolbox"
 	"testing"
 )
@@ -54,7 +55,10 @@ func TestNewPipeline(t *testing.T) {
 
 	in := make(chan int)
 	// for every odd, multiply times two, and add the results
-	oddPipe := NewPipeline(ifOdd, double)
+	stages := array.New[Stage[int]]()
+	stages.Push(ifOdd)
+	stages.Push(double)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	go func() {
@@ -89,7 +93,10 @@ func TestSource(t *testing.T) {
 	in := Source(done, numbers...)
 
 	// for every odd, multiply times two, and add the results
-	oddPipe := NewPipeline(ifOdd, double)
+	stages := array.New[Stage[int]]()
+	stages.Push(ifOdd)
+	stages.Push(double)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	/*
@@ -185,7 +192,10 @@ func TestOrDone(t *testing.T) {
 	}()
 
 	// for every odd, multiply times two
-	oddPipe := NewPipeline(ifOdd, double)
+	stages := array.New[Stage[int]]()
+	stages.Push(ifOdd)
+	stages.Push(double)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	exp := []int{2, 6, 10, 14, 18}

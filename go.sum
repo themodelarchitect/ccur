@@ -1,4 +1,6 @@
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/jkittell/array v0.0.0-20230914143454-1def247c865f h1:b7dnu6ezU9g/3+eeyjL5T4UFZe8R11lf7gztHn9j3PQ=
+github.com/jkittell/array v0.0.0-20230914143454-1def247c865f/go.mod h1:IFKJjDo8uAm89WkklRm2qX4ZWc4E7WSejS4V+CuByMc=
 github.com/jkittell/toolbox v0.0.0-20230413221842-f83782afcec5 h1:xQOeu4fZ2W4AXlQFFcuw2b8GE7Dzqnawci0S4L/xxe4=
 github.com/jkittell/toolbox v0.0.0-20230413221842-f83782afcec5/go.mod h1:TMGSj7Mho8sRC9Zx7aFE60UGxlrFO3MaQise68LnC14=
