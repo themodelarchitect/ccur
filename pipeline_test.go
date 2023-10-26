@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func numbers() array.Array[int] {
+func numbers() *array.Array[int] {
 	n := array.New[int]()
 	for i := 0; i < 10; i++ {
 		n.Push(i)
@@ -55,7 +55,7 @@ var onError = func(e error) {
 	fmt.Println("sink running function on error ", e.Error())
 }
 
-func TestNewPipeline(t *testing.T) {
+func TestNew(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
@@ -64,7 +64,7 @@ func TestNewPipeline(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := NewPipeline(stages)
+	oddPipe := New(stages)
 	out := oddPipe.Run(in)
 
 	go func() {
@@ -102,7 +102,7 @@ func TestSource(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := NewPipeline(stages)
+	oddPipe := New(stages)
 	out := oddPipe.Run(in)
 
 	/*
@@ -201,7 +201,7 @@ func TestOrDone(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := NewPipeline(stages)
+	oddPipe := New(stages)
 	out := oddPipe.Run(in)
 
 	exp := []int{2, 6, 10, 14, 18}

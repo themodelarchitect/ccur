@@ -39,7 +39,7 @@ func (s Stage[T]) Run(in <-chan T) chan T {
 
 // Pipeline is an array of functions to run in sequence.
 type Pipeline[T any] struct {
-	Stages array.Array[Stage[T]]
+	Stages *array.Array[Stage[T]]
 }
 
 // Run the functions in the pipeline.
@@ -51,7 +51,7 @@ func (p Pipeline[T]) Run(in <-chan T) <-chan T {
 	return in
 }
 
-func NewPipeline[T any](stages array.Array[Stage[T]]) Pipeline[T] {
+func New[T any](stages *array.Array[Stage[T]]) Pipeline[T] {
 	return Pipeline[T]{Stages: stages}
 }
 
@@ -299,7 +299,7 @@ func Repeat[T any](done <-chan bool, values ...T) <-chan T {
 // goroutine, and returns the constructed channel. Then, on the goroutine that
 // was created, Source ranges over the variadic slice that was passed in and sends
 // the slices' values on the channel it created.
-func Source[T any](done <-chan bool, values array.Array[T]) chan T {
+func Source[T any](done <-chan bool, values *array.Array[T]) chan T {
 	stream := make(chan T)
 	go func() {
 		defer close(stream)
