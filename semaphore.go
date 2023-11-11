@@ -1,4 +1,4 @@
-package pipeline
+package ccur
 
 type Semaphore struct {
 	semCh chan struct{}

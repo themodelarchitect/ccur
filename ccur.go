@@ -1,4 +1,4 @@
-package pipeline
+package ccur
 
 import (
 	"github.com/jkittell/array"
@@ -51,7 +51,7 @@ func (p Pipeline[T]) Run(in <-chan T) <-chan T {
 	return in
 }
 
-func New[T any](stages *array.Array[Stage[T]]) Pipeline[T] {
+func NewPipeline[T any](stages *array.Array[Stage[T]]) Pipeline[T] {
 	return Pipeline[T]{Stages: stages}
 }
 
