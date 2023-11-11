@@ -64,7 +64,7 @@ func TestNew(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := New(stages)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	go func() {
@@ -102,7 +102,7 @@ func TestSource(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := New(stages)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	/*
@@ -201,7 +201,7 @@ func TestOrDone(t *testing.T) {
 	stages := array.New[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
-	oddPipe := New(stages)
+	oddPipe := NewPipeline(stages)
 	out := oddPipe.Run(in)
 
 	exp := []int{2, 6, 10, 14, 18}
