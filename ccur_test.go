@@ -2,13 +2,13 @@ package ccur
 
 import (
 	"fmt"
-	"github.com/jkittell/array"
+	"github.com/jkittell/data/structures"
 	"github.com/jkittell/toolbox"
 	"testing"
 )
 
-func numbers() *array.Array[int] {
-	n := array.New[int]()
+func numbers() *structures.Array[int] {
+	n := structures.NewArray[int]()
 	for i := 0; i < 10; i++ {
 		n.Push(i)
 	}
@@ -61,7 +61,7 @@ func TestNew(t *testing.T) {
 
 	in := make(chan int)
 	// for every odd, multiply times two, and add the results
-	stages := array.New[Stage[int]]()
+	stages := structures.NewArray[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
 	oddPipe := NewPipeline(stages)
@@ -99,7 +99,7 @@ func TestSource(t *testing.T) {
 	in := Source(done, numbers())
 
 	// for every odd, multiply times two, and add the results
-	stages := array.New[Stage[int]]()
+	stages := structures.NewArray[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
 	oddPipe := NewPipeline(stages)
@@ -198,7 +198,7 @@ func TestOrDone(t *testing.T) {
 	}()
 
 	// for every odd, multiply times two
-	stages := array.New[Stage[int]]()
+	stages := structures.NewArray[Stage[int]]()
 	stages.Push(ifOdd)
 	stages.Push(double)
 	oddPipe := NewPipeline(stages)

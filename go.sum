@@ -1,6 +1,8 @@
-github.com/google/uuid v1.4.0 h1:MtMxsa51/r9yyhkyLsVeVt0B+BGQZzpQiTQ4eHZ8bc4=
-github.com/google/uuid v1.4.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.5.0 h1:1p67kYwdtXjb0gL0BPiP1Av9wiZPo5A8z2cWkTZ+eyU=
+github.com/google/uuid v1.5.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/jkittell/array v0.0.0-20231026221347-37c0de93c457 h1:X1Bk6JUpa12EI13+dqaWUznQDYvz5tuonFCvQBgwYDI=
 github.com/jkittell/array v0.0.0-20231026221347-37c0de93c457/go.mod h1:BBFehRHIhJVzGcBhqjBu/lswcmbAVX4gdM030WxgnuY=
+github.com/jkittell/data v0.0.0-20240114220618-b7b987972119 h1:1NaY3A59jUMezZSNwuRE0TdWY+OajqL2DL1SH9pXy2I=
+github.com/jkittell/data v0.0.0-20240114220618-b7b987972119/go.mod h1:x9/lNlUTDlg1AjQpqVnL7lUvkpRJq10JTxeTr0mjbYA=
 github.com/jkittell/toolbox v0.0.0-20231025185513-a63055b48f44 h1:nsdh0YeXkJg23Ul5lKInamakPW1kT4aL5KJvgIZz6EU=
 github.com/jkittell/toolbox v0.0.0-20231025185513-a63055b48f44/go.mod h1:TMGSj7Mho8sRC9Zx7aFE60UGxlrFO3MaQise68LnC14=
