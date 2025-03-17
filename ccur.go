@@ -1,7 +1,7 @@
 package ccur
 
 import (
-	"github.com/jkittell/data/structures"
+	"github.com/themodelarchitect/data/structures"
 	"sync"
 )
 

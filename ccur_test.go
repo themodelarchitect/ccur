@@ -2,8 +2,8 @@ package ccur
 
 import (
 	"fmt"
-	"github.com/jkittell/data/structures"
-	"github.com/jkittell/toolbox"
+	"github.com/themodelarchitect/data/structures"
+	"github.com/themodelarchitect/toolbox"
 	"testing"
 )
 
